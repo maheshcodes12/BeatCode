@@ -3,225 +3,169 @@ import { signup, login } from "../../services/registerApi";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getGoogleAuth } from "../../services/getGoogleAuth";
+
 const Register = () => {
-        const [userData, setUserData] = useState({
-                username: "",
-                email: "",
-                password: "",
-        });
+	const [userData, setUserData] = useState({ username: "", email: "", password: "" });
+	const [isOpen, setIsOpen] = useState(false);
+	const [activeTab, setActiveTab] = useState("login");
 
-        const handleRegister = async (type) => {
-                if (type === "signup") {
-                        if (!userData.username) {
-                                toast.warn("Username is required");
-                                return;
-                        }
-                }
-                if (!userData.email) {
-                        toast.warn("Email is required");
-                        return;
-                } else if (!/\S+@\S+\.\S+/.test(userData.email)) {
-                        toast.warn("Invalid email format");
-                        return;
-                }
-                if (!userData.password) {
-                        toast.warn("Password is required");
-                        return;
-                } else if (userData.password.length < 6) {
-                        toast.warn("Password must be at least 6 characters long");
-                        return;
-                }
-                if (type === "signup") {
-                        await signup(userData);
-                }
-                if (type === "login") {
-                        await login(userData, "normal");
-                }
-        };
-        const [toggleRegister, setToggleRegister] = useState(false);
-        const toggle = () => {
-                setToggleRegister(!toggleRegister);
-        };
-        const [activeButton, setActiveButton] = useState("login");
-        const handleButtonClick = (buttonName) => {
-                setActiveButton(buttonName);
-        };
-        const handleKeyDown = (event, type) => {
-                if (event.key === "Enter") {
-                        handleRegister(type);
-                }
-        };
+	const openModal = (tab) => {
+		setActiveTab(tab);
+		setIsOpen(true);
+	};
+	const closeModal = () => setIsOpen(false);
 
-        return (
-                <div className="h-full w-full">
-                        <button className="bg-[rgb(51,51,254)] text-md p-1  font-semibold rounded-[10px]" onClick={toggle}>
-                                Register
-                        </button>
-                        {toggleRegister && (
-                                <div>
-                                        <div
-                                                className="fixed w-full h-full bg-[rgba(0,0,0,0.5)] z-[1000] left-0 top-0"
-                                                onClick={toggle}
-                                        ></div>
-                                        <div className="bg-[#2f3136] fixed w-[80%] lg:w-[30%] lg:left-[35%] h-[75%] left-[10%] top-[15%] flex justify-center items-center flex-col  z-[1001]  border p-5 rounded-[10px] border-solid border-[#ccc] ">
-                                                <div className="flex w-full items-center justify-center">
-                                                        <button
-                                                                className={`border w-[40%] lg:w-[30%] h-10 rounded-l-md   bg-[#179b77] border-solid border-[white] hover:bg-[#179b77]   
-                                                                        ${
-                                                                                activeButton === "login"
-                                                                                        ? "bg-[#179b77]"
-                                                                                        : "bg-[#435359]"
-                                                                        }`}
-                                                                onClick={() => handleButtonClick("login")}
-                                                        >
-                                                                Log In
-                                                        </button>
-                                                        <button
-                                                                className={`border w-[40%] lg:w-[30%] rounded-r-md h-10 bg-[#179b77]  border-solid border-[white] hover:bg-[#179b77]  
-                                                                        ${
-                                                                                activeButton === "signup"
-                                                                                        ? `bg-[#179b77]`
-                                                                                        : `bg-[#435359]`
-                                                                        }`}
-                                                                onClick={() => handleButtonClick("signup")}
-                                                        >
-                                                                Sign Up
-                                                        </button>
-                                                </div>
-                                                {activeButton === "signup" ? (
-                                                        <div className="w-full flex flex-col h-[100%] lg:w-[80%] justify-center">
-                                                                <form className="w-full  flex flex-col">
-                                                                        <p className="text-center text-3xl py-3 pb-7">
-                                                                                Sign up for free
-                                                                        </p>
-                                                                        <input
-                                                                                className="py-3 text-[black] pl-2.5"
-                                                                                placeholder="User Name *"
-                                                                                type="text"
-                                                                                value={userData.username}
-                                                                                required
-                                                                                onChange={(e) =>
-                                                                                        setUserData({
-                                                                                                ...userData,
-                                                                                                username: e.target.value,
-                                                                                        })
-                                                                                }
-                                                                                autoComplete="off"
-                                                                                onKeyDown={(e) => handleKeyDown(e, "signup")}
-                                                                        />
-                                                                        <br />
-                                                                        <input
-                                                                                className="py-3 text-[black] pl-2.5"
-                                                                                placeholder="Email Address *"
-                                                                                type="email"
-                                                                                required
-                                                                                value={userData.email}
-                                                                                onChange={(e) =>
-                                                                                        setUserData({
-                                                                                                ...userData,
-                                                                                                email: e.target.value,
-                                                                                        })
-                                                                                }
-                                                                                autoComplete="off"
-                                                                                onKeyDown={(e) => handleKeyDown(e, "signup")}
-                                                                        />
-                                                                        <br />
-                                                                        <input
-                                                                                className="py-3 text-[black] pl-2.5"
-                                                                                placeholder="Set a Password *"
-                                                                                required
-                                                                                type="password"
-                                                                                value={userData.password}
-                                                                                onChange={(e) =>
-                                                                                        setUserData({
-                                                                                                ...userData,
-                                                                                                password: e.target.value,
-                                                                                        })
-                                                                                }
-                                                                                onKeyDown={(e) => handleKeyDown(e, "signup")}
-                                                                                autoComplete="off"
-                                                                        />
-                                                                        <br />
-                                                                        <button
-                                                                                className="bg-[#179b77] w-full py-2  text-xl"
-                                                                                type="button"
-                                                                                onClick={() => {
-                                                                                        handleRegister("signup");
-                                                                                }}
-                                                                        >
-                                                                                Get Started
-                                                                        </button>
-                                                                </form>
-                                                                <button
-                                                                        className="w-full py-2 mt-5 text-xl flex gap-5 justify-center items-center bg-[#4f86ec] text-white"
-                                                                        onClick={getGoogleAuth}
-                                                                >
-                                                                        <i className="fa-brands fa-google" />
-                                                                        <span> Sign up with Google</span>
-                                                                </button>
-                                                        </div>
-                                                ) : (
-                                                        <div className="w-full flex flex-col h-[100%] lg:w-[80%] justify-center">
-                                                                <form className="w-full flex flex-col justify-center ">
-                                                                        <p className="text-center text-[28px] py-8">
-                                                                                Welcome Back!
-                                                                        </p>
-                                                                        <input
-                                                                                className="py-3 text-[black] pl-2.5"
-                                                                                placeholder="Email Address *"
-                                                                                type="email"
-                                                                                required
-                                                                                value={userData.email}
-                                                                                onChange={(e) =>
-                                                                                        setUserData({
-                                                                                                ...userData,
-                                                                                                email: e.target.value,
-                                                                                        })
-                                                                                }
-                                                                                autoComplete="off"
-                                                                                onKeyDown={(e) => handleKeyDown(e, "login")}
-                                                                        />
-                                                                        <br />
-                                                                        <input
-                                                                                className="py-3 text-[black] pl-2.5"
-                                                                                placeholder="Password *"
-                                                                                required
-                                                                                type="password"
-                                                                                value={userData.password}
-                                                                                onChange={(e) =>
-                                                                                        setUserData({
-                                                                                                ...userData,
-                                                                                                password: e.target.value,
-                                                                                        })
-                                                                                }
-                                                                                autoComplete="off"
-                                                                                onKeyDown={(e) => handleKeyDown(e, "login")}
-                                                                        />
-                                                                        <br />
-                                                                        <button
-                                                                                className="bg-[#179b77] w-full py-2  text-xl"
-                                                                                type="button"
-                                                                                onClick={() => {
-                                                                                        handleRegister("login");
-                                                                                }}
-                                                                        >
-                                                                                Log In
-                                                                        </button>
-                                                                </form>
-                                                                <button
-                                                                        className="w-full py-2 mt-5 text-xl flex gap-5 justify-center items-center bg-[#4f86ec] text-white"
-                                                                        onClick={getGoogleAuth}
-                                                                >
-                                                                        <i className="fa-brands fa-google" />
-                                                                        <span> Sign in with Google</span>
-                                                                </button>
-                                                        </div>
-                                                )}
-                                        </div>
-                                </div>
-                        )}
-                </div>
-        );
+	const handleRegister = async (type) => {
+		if (type === "signup" && !userData.username) {
+			toast.warn("Username is required");
+			return;
+		}
+		if (!userData.email) {
+			toast.warn("Email is required");
+			return;
+		} else if (!/\S+@\S+\.\S+/.test(userData.email)) {
+			toast.warn("Invalid email format");
+			return;
+		}
+		if (!userData.password) {
+			toast.warn("Password is required");
+			return;
+		} else if (userData.password.length < 6) {
+			toast.warn("Password must be at least 6 characters long");
+			return;
+		}
+		if (type === "signup") await signup(userData);
+		if (type === "login") await login(userData, "normal");
+	};
+
+	const handleKeyDown = (event, type) => {
+		if (event.key === "Enter") handleRegister(type);
+	};
+
+	return (
+		<>
+			<div className="flex items-center gap-2">
+				<button
+					onClick={() => openModal("login")}
+					className="rounded-[9px] border border-border px-4 py-2 text-sm font-semibold text-ink transition-colors hover:bg-[#F1F2F3]"
+				>
+					Log in
+				</button>
+				<button
+					onClick={() => openModal("signup")}
+					className="rounded-[9px] bg-brand px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-hover"
+				>
+					Sign up
+				</button>
+			</div>
+
+			{isOpen && (
+				<div className="fixed inset-0 z-[1000] flex items-center justify-center px-4">
+					<div className="fixed inset-0 bg-ink/40 backdrop-blur-sm" onClick={closeModal} />
+
+					<div className="relative z-[1001] w-full max-w-[380px] rounded-2xl border border-border bg-surface p-6 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]">
+						<div className="mb-6 flex rounded-lg border border-border bg-[#FBFBFB] p-1">
+							<button
+								onClick={() => setActiveTab("login")}
+								className={`flex-1 rounded-md py-2 text-sm font-semibold transition-colors ${
+									activeTab === "login" ? "bg-surface text-ink shadow-sm" : "text-ink-muted"
+								}`}
+							>
+								Log In
+							</button>
+							<button
+								onClick={() => setActiveTab("signup")}
+								className={`flex-1 rounded-md py-2 text-sm font-semibold transition-colors ${
+									activeTab === "signup" ? "bg-surface text-ink shadow-sm" : "text-ink-muted"
+								}`}
+							>
+								Sign Up
+							</button>
+						</div>
+
+						{activeTab === "signup" ? (
+							<div className="flex flex-col gap-3">
+								<h2 className="mb-1 font-display text-xl font-bold text-ink">Create your account</h2>
+								<input
+									className="rounded-[9px] border border-border bg-bg px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-brand"
+									placeholder="Username"
+									type="text"
+									value={userData.username}
+									onChange={(e) => setUserData({ ...userData, username: e.target.value })}
+									onKeyDown={(e) => handleKeyDown(e, "signup")}
+									autoComplete="off"
+								/>
+								<input
+									className="rounded-[9px] border border-border bg-bg px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-brand"
+									placeholder="Email address"
+									type="email"
+									value={userData.email}
+									onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+									onKeyDown={(e) => handleKeyDown(e, "signup")}
+									autoComplete="off"
+								/>
+								<input
+									className="rounded-[9px] border border-border bg-bg px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-brand"
+									placeholder="Password"
+									type="password"
+									value={userData.password}
+									onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+									onKeyDown={(e) => handleKeyDown(e, "signup")}
+									autoComplete="off"
+								/>
+								<button
+									onClick={() => handleRegister("signup")}
+									className="mt-1 rounded-[9px] bg-brand py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-hover"
+								>
+									Get started
+								</button>
+								<button
+									onClick={getGoogleAuth}
+									className="flex items-center justify-center gap-2 rounded-[9px] border border-border py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-[#F1F2F3]"
+								>
+									<i className="fa-brands fa-google" /> Sign up with Google
+								</button>
+							</div>
+						) : (
+							<div className="flex flex-col gap-3">
+								<h2 className="mb-1 font-display text-xl font-bold text-ink">Welcome back</h2>
+								<input
+									className="rounded-[9px] border border-border bg-bg px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-brand"
+									placeholder="Email address"
+									type="email"
+									value={userData.email}
+									onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+									onKeyDown={(e) => handleKeyDown(e, "login")}
+									autoComplete="off"
+								/>
+								<input
+									className="rounded-[9px] border border-border bg-bg px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-brand"
+									placeholder="Password"
+									type="password"
+									value={userData.password}
+									onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+									onKeyDown={(e) => handleKeyDown(e, "login")}
+									autoComplete="off"
+								/>
+								<button
+									onClick={() => handleRegister("login")}
+									className="mt-1 rounded-[9px] bg-brand py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-hover"
+								>
+									Log in
+								</button>
+								<button
+									onClick={getGoogleAuth}
+									className="flex items-center justify-center gap-2 rounded-[9px] border border-border py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-[#F1F2F3]"
+								>
+									<i className="fa-brands fa-google" /> Sign in with Google
+								</button>
+							</div>
+						)}
+					</div>
+				</div>
+			)}
+		</>
+	);
 };
 
 export default Register;

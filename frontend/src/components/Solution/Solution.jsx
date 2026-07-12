@@ -1,25 +1,20 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React from "react";
-import capitalizeString from "../../services/capitaliseWord";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { androidstudio, hybrid } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import "../Solution/Solution.css";
-
-const CodeDisplay = ({ code, language }) => {
-        return (
-                <SyntaxHighlighter language={language} wrapLongLines={true}>
-                        {code}
-                </SyntaxHighlighter>
-        );
-};
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const Solution = ({ solution, language }) => {
-        return (
-                <div>
-                        <CodeDisplay code={solution} language={language} />
-                </div>
-        );
+	return (
+		<div className="overflow-hidden rounded-lg border border-border">
+			<SyntaxHighlighter
+				language={language}
+				style={oneLight}
+				wrapLongLines={true}
+				customStyle={{ margin: 0, fontSize: 13 }}
+			>
+				{solution}
+			</SyntaxHighlighter>
+		</div>
+	);
 };
 
 export default Solution;

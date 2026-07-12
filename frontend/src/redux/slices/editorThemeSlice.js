@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const editorThemeSlice = createSlice({
         name: "editorTheme",
         initialState: {
-                value: "monokai",
+                value: "github",
         },
         reducers: {
                 updateEditorTheme: (state, action) => {

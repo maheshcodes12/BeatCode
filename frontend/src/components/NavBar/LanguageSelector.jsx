@@ -1,45 +1,68 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-// src/components/LanguageSelector.js
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import React, { useEffect } from "react";
-import "./LanguageSelector.css";
-import { useSelector, useDispatch } from "react-redux";
-import { updateLanguage } from "../../redux/slices/languageSlice";
-import { updateOutput } from "../../redux/slices/outputSlice";
-import { updateUserInput } from "../../redux/slices/userInputSlice";
-const LanguageSelector = ({ socket, roomID }) => {
-        const language = useSelector((state) => state.language?.value);
-        const dispatch = useDispatch();
-        const languageOptions = [
-                { name: "C", value: "c" },
-                { name: "C++", value: "cpp" },
-                { name: "Java", value: "java" },
-                { name: "Python", value: "python" },
-        ];
+const Profile = () => {
+	const [isOpen, setIsOpen] = useState(false);
+	const email = localStorage.getItem("email");
+	const username = localStorage.getItem("username");
+	const initial = username?.charAt(0)?.toUpperCase() || email?.charAt(0)?.toUpperCase();
+	const frontendURL = import.meta.env.VITE_FRONTEND_URL;
 
-        return (
-                <div className="custom-select-container">
-                        <select
-                                className="select-language"
-                                id="language"
-                                value={language}
-                                onChange={(e) => {
-                                        dispatch(updateLanguage(e.target.value));
-                                        dispatch(updateOutput(""));
-                                        dispatch(updateUserInput(""));
-                                        socket &&
-                                                socket.emit("languageChange", { language: e.target.value, roomID: roomID });
-                                }}
-                        >
-                                {languageOptions.map((language) => (
-                                        <option key={language.value} value={language.value}>
-                                                {language.name}
-                                        </option>
-                                ))}
-                        </select>
-                </div>
-        );
+	const handleLogout = () => {
+		localStorage.clear();
+		toast.success("Logging out, bye bye", { autoClose: 1500 });
+		setTimeout(() => {
+			window.location.href = frontendURL;
+		}, 1500);
+	};
+
+	return (
+		<div className="relative">
+			<button
+				onClick={() => setIsOpen(!isOpen)}
+				className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-sm font-semibold text-white transition-opacity hover:opacity-90"
+			>
+				{initial}
+			</button>
+
+			{isOpen && (
+				<>
+					<div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
+					<div className="absolute right-0 top-11 z-50 w-64 rounded-xl border border-border bg-surface p-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]">
+						<div className="border-b border-border px-3 py-3">
+							<div className="font-display text-sm font-semibold text-ink">{username}</div>
+							<div className="mt-0.5 truncate text-xs text-ink-faint">{email}</div>
+						</div>
+						<div className="flex flex-col py-1">
+							<Link
+								to="/submissions"
+								onClick={() => setIsOpen(false)}
+								className="rounded-md px-3 py-2 text-sm text-ink-muted transition-colors hover:bg-[#F1F2F3] hover:text-ink"
+							>
+								View submissions
+							</Link>
+							<Link
+								to="/settings"
+								onClick={() => setIsOpen(false)}
+								className="rounded-md px-3 py-2 text-sm text-ink-muted transition-colors hover:bg-[#F1F2F3] hover:text-ink"
+							>
+								Settings
+							</Link>
+						</div>
+						<div className="border-t border-border pt-1">
+							<button
+								onClick={handleLogout}
+								className="w-full rounded-md px-3 py-2 text-left text-sm font-medium text-hard transition-colors hover:bg-[#FBEAEA]"
+							>
+								Log out
+							</button>
+						</div>
+					</div>
+				</>
+			)}
+		</div>
+	);
 };
 
-export default LanguageSelector;
+export default Profile;

@@ -1,52 +1,49 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React from "react";
 import capitalizeString from "../../services/capitaliseWord";
+
+const pillClass = {
+	easy: "bg-[#E6F6EF] text-easy",
+	medium: "bg-[#FBF1E1] text-medium",
+	hard: "bg-[#FBEAEA] text-hard",
+};
+
 const Question = ({ question }) => {
-        const { title, diff, description, example_cases } = question;
-        return (
-                <div>
-                        <div className="text-[white] text-2xl font-bold pl-5 pt-2.5">{title}</div>
-                        <div
-                                className={`${
-                                        diff == "easy"
-                                                ? `text-green-500`
-                                                : diff == "medium"
-                                                ? `text-amber-400`
-                                                : `text-red-500`
-                                } text-xl pl-5 pt-2.5`}
-                        >
-                                {capitalizeString(diff)}
-                        </div>
-                        <div className="text-[white] text-xl pl-5 pt-2.5">{description}</div>
-                        <div className="text-[white]">
-                                {example_cases.map((example, index) => {
-                                        return (
-                                                <div className="pt-[20px] pl-[20px]" key={index}>
-                                                        <div className="text-lg font-bold mb-3">Example {index + 1} : </div>
-                                                        <div className="bg-[#222222] w-[70%] rounded-lg">
-                                                                <div className="ml-3 ">
-                                                                        <span className="text-[#4ec9b0]">Input</span> :{" "}
-                                                                        <span className="text-[#ce9178]">
-                                                                                {example.input}
-                                                                        </span>
-                                                                </div>
-                                                                <div className="ml-3">
-                                                                        <span className="text-[#4ec9b0]">Output</span> :{" "}
-                                                                        <span className="text-[#ce9178]">
-                                                                                {example.output}
-                                                                        </span>
-                                                                </div>
-                                                                <div className="ml-3">
-                                                                        Explanation : {example.explanation}
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                        );
-                                })}
-                        </div>
-                </div>
-        );
+	const { title, diff, description, example_cases } = question;
+	return (
+		<div className="flex flex-col gap-4 p-5">
+			<div>
+				<h1 className="font-display text-2xl font-bold text-ink">{title}</h1>
+				<span
+					className={`mt-2 inline-block rounded-full px-2.5 py-1 text-xs font-semibold ${pillClass[diff] || pillClass.easy}`}
+				>
+					{capitalizeString(diff)}
+				</span>
+			</div>
+			<p className="text-[15px] leading-relaxed text-ink-muted">{description}</p>
+			<div className="flex flex-col gap-4">
+				{example_cases.map((example, index) => (
+					<div key={index} className="rounded-lg border border-border bg-[#FBFBFB] p-4">
+						<p className="mb-2 text-sm font-semibold text-ink">Example {index + 1}</p>
+						<div className="flex flex-col gap-1.5 font-mono text-sm">
+							<div>
+								<span className="text-brand">Input:</span>{" "}
+								<span className="text-ink-muted">{example.input}</span>
+							</div>
+							<div>
+								<span className="text-brand">Output:</span>{" "}
+								<span className="text-ink-muted">{example.output}</span>
+							</div>
+							{example.explanation && (
+								<div className="pt-1 font-sans text-[13px] text-ink-faint">
+									Explanation: {example.explanation}
+								</div>
+							)}
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	);
 };
 
 export default Question;

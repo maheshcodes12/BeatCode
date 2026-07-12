@@ -1,98 +1,63 @@
-/* eslint-disable no-unsafe-optional-chaining */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
 import capitalizeString from "../../services/capitaliseWord";
 import { useParams } from "react-router-dom";
 import { getSubmissions } from "../../services/getSubmissionsApi";
+
 const QuestionSubmission = () => {
-        const { id } = useParams();
-        const [submissions, setSubmissions] = useState([]);
+	const { id } = useParams();
+	const [submissions, setSubmissions] = useState([]);
 
-        useEffect(() => {
-                const handleSubmissions = async () => {
-                        const sub = await getSubmissions(id);
-                        setSubmissions(sub);
-                };
+	useEffect(() => {
+		const handleSubmissions = async () => {
+			const sub = await getSubmissions(id);
+			setSubmissions(sub);
+		};
+		handleSubmissions();
+	}, [id]);
 
-                handleSubmissions();
-        }, [id]);
+	const formatDateTime = (dateTime) => {
+		const date = new Date(dateTime);
+		const dateString = date.toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" });
+		const timeString = date.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit", hour12: true });
+		return `${dateString} at ${timeString}`;
+	};
 
-        const formatDateTime = (dateTime) => {
-                const date = new Date(dateTime);
-                const options = { month: "long", day: "numeric", year: "numeric" };
-                const dateString = date.toLocaleDateString(undefined, options);
-                const timeString = date.toLocaleTimeString(undefined, {
-                        hour: "numeric",
-                        minute: "2-digit",
-                        hour12: true,
-                });
-                return `${dateString} at ${timeString}`;
-        };
-        return (
-                <div className="w-[100%] overscroll-x-contain">
-                        {submissions?.length != 0 ? (
-                                submissions.map((submission, index) => {
-                                        return (
-                                                <div key={submission._id} className="w-[100%] border-b-2">
-                                                        <div className="abcd">
-                                                                <div className="flex gap-5 ml-2 mt-2 text-lg">
-                                                                        {index + 1}]
-                                                                        <div className="flex gap-3 justify-center items-center">
-                                                                                <div className="profile-info">
-                                                                                        <img
-                                                                                                className="h-8 rounded-[50%] cursor-pointer"
-                                                                                                src={`https://ui-avatars.com/api/?name=${submission.user_email?.charAt(
-                                                                                                        0
-                                                                                                )}&background=random`}
-                                                                                                alt="userProfile"
-                                                                                        />
-                                                                                </div>
-                                                                                <div> {submission.user_name}</div>
-                                                                        </div>
-                                                                </div>
-                                                                <div className="flex gap-10">
-                                                                        <div className="ml-12 mt-3 text-base">
-                                                                                {" "}
-                                                                                Submitted On :{" "}
-                                                                                <span className="text-[#ce9178]">
-                                                                                        {formatDateTime(
-                                                                                                submission.createdAt
-                                                                                        )}
-                                                                                </span>
-                                                                        </div>
-                                                                        <div className="text-base mt-3">
-                                                                                Language :{" "}
-                                                                                <span className="text-[#4ec9b0]">
-                                                                                        {capitalizeString(
-                                                                                                submission.language === "cpp"
-                                                                                                        ? "C++"
-                                                                                                        : submission.language
-                                                                                        )}
-                                                                                </span>
-                                                                        </div>
-                                                                </div>
-                                                        </div>
-                                                        <div className="flex justify-between ml-[3vw] mb-[2vh] mt-[2vh] mr-[2vw]">
-                                                                <div className="w-[100%]">
-                                                                        <SyntaxHighlighter
-                                                                                wrapLines="true"
-                                                                                language={submission.language}
-                                                                        >
-                                                                                {submission.code}
-                                                                        </SyntaxHighlighter>
-                                                                </div>
-                                                        </div>
-                                                </div>
-                                        );
-                                })
-                        ) : (
-                                <div className="text-[#fff] text-2xl flex justify-center mt-5">
-                                        No submissions yet , be the first one 😊
-                                </div>
-                        )}
-                </div>
-        );
+	return (
+		<div className="flex flex-col gap-4 p-4">
+			{submissions?.length ? (
+				submissions.map((submission) => (
+					<div key={submission._id} className="rounded-lg border border-border p-4">
+						<div className="mb-3 flex flex-wrap items-center gap-3">
+							<img
+								className="h-7 w-7 rounded-full"
+								src={`https://ui-avatars.com/api/?name=${submission.user_email?.charAt(0)}&background=random`}
+								alt="userProfile"
+							/>
+							<span className="text-sm font-semibold text-ink">{submission.user_name}</span>
+							<span className="text-xs text-ink-faint">· {formatDateTime(submission.createdAt)}</span>
+							<span className="text-xs text-ink-faint">
+								· {capitalizeString(submission.language === "cpp" ? "C++" : submission.language)}
+							</span>
+						</div>
+						<div className="overflow-hidden rounded-lg border border-border">
+							<SyntaxHighlighter
+								language={submission.language}
+								style={oneLight}
+								wrapLongLines
+								customStyle={{ margin: 0, fontSize: 13 }}
+							>
+								{submission.code}
+							</SyntaxHighlighter>
+						</div>
+					</div>
+				))
+			) : (
+				<div className="flex justify-center py-8 text-sm text-ink-faint">No submissions yet, be the first one 😊</div>
+			)}
+		</div>
+	);
 };
 
 export default QuestionSubmission;

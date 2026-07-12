@@ -1,77 +1,36 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import Solution from "../Solution/Solution.jsx";
-import "../Solution/Solution.css";
+
+const languages = [
+	{ key: "c", label: "C" },
+	{ key: "cpp", label: "C++" },
+	{ key: "java", label: "Java" },
+	{ key: "python", label: "Python" },
+];
 
 export default function ProblemSolutions({ question }) {
-        const [navigation, setNavigation] = useState("c");
+	const [navigation, setNavigation] = useState("c");
 
-        return (
-                <>
-                        <div className="w-[100%]">
-                                <div className="w-full flex justify-around border-b-[rgb(76,76,76)] border-b border-solid h-[7vh]">
-                                        <button
-                                                className={`${navigation === `c` ? `active` : ``} questionpagebtn`}
-                                                onClick={() => setNavigation("c")}
-                                        >
-                                                C
-                                        </button>
-                                        <button
-                                                className={`${navigation === `cpp` ? `active` : ``} questionpagebtn`}
-                                                onClick={() => setNavigation("cpp")}
-                                        >
-                                                C++
-                                        </button>
-                                        <button
-                                                className={`${navigation === `java` ? `active` : ``} questionpagebtn`}
-                                                onClick={() => setNavigation("java")}
-                                        >
-                                                Java
-                                        </button>
-                                        <button
-                                                className={`${navigation === `python` ? `active` : ``} questionpagebtn`}
-                                                onClick={() => setNavigation("python")}
-                                        >
-                                                Python
-                                        </button>
-                                </div>
-                                {(() => {
-                                        switch (navigation) {
-                                                case "c":
-                                                        return <Solution solution={question.solution.c} language="c" />;
-
-                                                case "cpp":
-                                                        return <Solution solution={question.solution.cpp} language="cpp" />;
-
-                                                case "java":
-                                                        return (
-                                                                <Solution
-                                                                        solution={question.solution.java}
-                                                                        language="java"
-                                                                />
-                                                        );
-
-                                                case "javascript":
-                                                        return (
-                                                                <Solution
-                                                                        solution={question.solution.javascript}
-                                                                        language="javascript"
-                                                                />
-                                                        );
-
-                                                case "python":
-                                                        return (
-                                                                <Solution
-                                                                        solution={question.solution.python}
-                                                                        language="python"
-                                                                />
-                                                        );
-
-                                                default:
-                                                        "No solution found for current problem :(";
-                                        }
-                                })()}
-                        </div>
-                </>
-        );
+	return (
+		<div className="flex h-full flex-col">
+			<div className="flex gap-1 border-b border-border px-4 pt-3">
+				{languages.map((lang) => (
+					<button
+						key={lang.key}
+						className={`border-b-2 px-3 py-2 text-sm font-semibold transition-colors ${
+							navigation === lang.key
+								? "border-brand text-ink"
+								: "border-transparent text-ink-muted hover:text-ink"
+						}`}
+						onClick={() => setNavigation(lang.key)}
+					>
+						{lang.label}
+					</button>
+				))}
+			</div>
+			<div className="flex-1 overflow-auto p-4">
+				<Solution solution={question.solution[navigation]} language={navigation} />
+			</div>
+		</div>
+	);
 }

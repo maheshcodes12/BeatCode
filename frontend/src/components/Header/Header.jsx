@@ -1,156 +1,49 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import Register from "../Login/Register";
 import { isLoggedIn } from "../Login/isLoggedIn";
 import Profile from "../Login/Profile";
-import { Link } from "react-router-dom";
-import {
-	AppBar,
-	Button,
-	colors,
-	styled,
-	Toolbar,
-	Typography,
-	Box,
-} from "@mui/material";
 
-import { theme } from "../../theme";
+const navLinks = [
+	{ label: "Practice", to: "/practiceproblems" },
+	{ label: "Compiler", to: "/onlinecompiler" },
+	{ label: "Code Room", to: "/room" },
+	{ label: "Leaderboard", to: "/leaderboard" },
+];
 
 const Header = () => {
-	const StyledToolbar = styled(Toolbar)({
-		display: "flex",
-		justifyContent: "space-evenly",
-		alignContent: "center",
-		gap: 30,
-	});
+	const location = useLocation();
+
 	return (
-		<AppBar
-			position='static'
-			color='primary'>
-			<StyledToolbar>
-				<Box
-					bgcolor='#fb690a'
-					borderRadius={theme.shape.borderRadius}
-					justifyContent={"center"}
-					display={"flex"}
-					p={1}
-					flex={2}
-					maxWidth={120}>
-					<Link to='/'>
-						<img
-							width={120}
-							height={50}
-							src='/logo.svg'
-							alt='beatcode-logo'
-						/>
-					</Link>
-				</Box>
-				<Box
-					display={"flex"}
-					flexDirection={"column"}
-					sx={{ display: { sm: "flex", md: "none" } }}>
-					<Link to='/practiceproblems'>Practice Problems</Link>
-					<Link to='/onlinecompiler'>Online Compiler</Link>
-					<Link to='/room'>Code Room</Link>
-					<Link to='/leaderboard'>Leaderboard</Link>
-				</Box>
+		<header className="sticky top-0 z-50 w-full border-b border-border bg-bg/85 backdrop-blur">
+			<div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-6">
+				<Link to="/" className="flex items-center gap-2.5 font-display text-lg font-bold text-ink">
+					<span className="flex h-[30px] w-[30px] items-center justify-center rounded-[7px] bg-brand font-mono text-[15px] font-semibold text-white">
+						&gt;_
+					</span>
+					BeatCode
+				</Link>
 
-				<Box
-					flex={10}
-					justifyContent={"left"}
-					display={"flex"}
-					gap={4}
-					sx={{ display: { sm: "none", md: "flex" } }}>
-					<Link to='/practiceproblems'>Practice Problems</Link>
-					<Link to='/onlinecompiler'>Online Compiler</Link>
-					<Link to='/room'>Code Room</Link>
-					<Link to='/leaderboard'>Leaderboard</Link>
-				</Box>
-				<Box
-					flex={1}
-					justifyContent={"center"}
-					display={"flex"}>
-					<div>{isLoggedIn() ? <Profile /> : <Register />}</div>
-				</Box>
-
-				{/* <div className='fixed left-0 w-full h-full z-[1999] bg-[rgba(0,0,0,0.5)]  top-0'></div>
-				<div className='fixed z-[2000] left-[10%] top-[20%] w-[10%] pl-8'>
-					<i className='fa-solid fa-xmark ml-auto text-3xl'></i>
-				</div> */}
-
-				{/* <div className='fixed w-[70%] h-[50%] left-[15%] top-[25%] flex justify-center  flex-col p-4 gap-2  items-center bg-[#272822]  z-[2000] shadow-sm'>
-					<div className='text-xl py-1 flex flex-col justify-around h-full items-center border border-solid w-full'>
-						<div className='w-full flex justify-center items-center h-[20%]'>
-							<div className='rounded-xl border p-2 bg-green-600'>
-								<Link to='/'>Home</Link>
-							</div>
-						</div>
-						<div className='w-full flex justify-center items-center h-[20%]'>
-							<div className='rounded-xl border p-2 bg-green-600'>
-								<Link to='/practiceproblems'>Practice Problems</Link>
-							</div>
-						</div>
-						<div className='w-full flex justify-center items-center h-[20%]'>
-							<div className='rounded-xl border p-2 bg-green-600'>
-								<Link to='/onlinecompiler'>Online Compiler</Link>
-							</div>
-						</div>
-						<div className='w-full flex justify-center items-center h-[20%]'>
-							<div className='rounded-xl border p-2 bg-green-600'>
-								<Link to='/room'>Code Room</Link>
-							</div>
-						</div>
-						<div className='w-full flex justify-center items-center h-[20%]'>
-							<div className='rounded-xl border p-2 bg-green-600'>
-								<Link to='leaderboard'>Leaderboard</Link>
-							</div>
-						</div>
-					</div>
-				</div> */}
-				{/* <div className='flex w-full h-full justify-between items-center px-4'>
-					<div className='w-[10%]'>
-						<i className='fa-solid fa-bars ml-auto text-3xl'></i>
-					</div>
-
-					<div className='w-[50%]  flex justify-center items-center'>
-						<div className='bg-[#fb690a] w-full p-2 rounded-xl flex justify-center items-center'>
-							<Link to='/'>
-								<img
-									className='w-[100%] flex justify-center items-center'
-									src='/logo.svg'
-									alt='beatcode-logo'
-								/>
+				<nav className="hidden items-center gap-7 md:flex">
+					{navLinks.map((link) => {
+						const active = location.pathname.startsWith(link.to);
+						return (
+							<Link
+								key={link.to}
+								to={link.to}
+								className={`border-b-2 pb-1 text-[14.5px] font-medium transition-colors ${
+									active ? "border-brand text-ink" : "border-transparent text-ink-muted hover:text-ink"
+								}`}
+							>
+								{link.label}
 							</Link>
-						</div>
-					</div>
-					<div className='w-[20%]'>
-						<div>{isLoggedIn() ? <Profile /> : <Register />}</div>
-					</div>
-				</div>
+						);
+					})}
+				</nav>
 
-				<div className='flex w-full h-full justify-between items-center px-4'>
-					<div className='w-[10%]'>
-						<i className='fa-solid fa-bars ml-auto text-3xl'></i>
-					</div>
-
-					<div className='w-[50%]  flex justify-center items-center'>
-						<div className='bg-[#fb690a] w-full p-2 rounded-xl flex justify-center items-center'>
-							<Link to='/'>
-								<img
-									className='w-[100%] flex justify-center items-center'
-									src='/logo.svg'
-									alt='beatcode-logo'
-								/>
-							</Link>
-						</div>
-					</div>
-					<div className='w-[20%]'>
-						<div>{isLoggedIn() ? <Profile /> : <Register />}</div>
-					</div>
-				</div> */}
-			</StyledToolbar>
-		</AppBar>
+				<div className="flex items-center gap-3.5">{isLoggedIn() ? <Profile /> : <Register />}</div>
+			</div>
+		</header>
 	);
 };
 
