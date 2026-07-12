@@ -1,16 +1,13 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React from "react";
 
-export default function ProgressBar({ progress, color }) {
-        const progressStyle = {
-                width: `${progress * 100}%`,
-                background: `${color}`,
-        };
-
-        return (
-                <div className="bg-white w-[50%] lg:w-full h-2 mt-2 mb-6 rounded-full">
-                        <div className="h-2 rounded-full" style={progressStyle}></div>
-                </div>
-        );
+export default function ProgressBar({ progress, colorClass }) {
+	return (
+		<div className="mb-5 mt-2 h-1.5 w-full rounded-full bg-[#EDEEF0]">
+			<div
+				className={`h-1.5 rounded-full transition-all ${colorClass}`}
+				style={{ width: `${Math.min(progress * 100, 100)}%` }}
+			></div>
+		</div>
+	);
 }

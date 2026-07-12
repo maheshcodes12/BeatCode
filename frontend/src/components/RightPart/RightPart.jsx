@@ -1,16 +1,14 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React from "react";
 import OutputWindow from "../OutputWindow/OutputWindow";
 import InputWindow from "../InputWindow/InputWindow";
 
 const RightPart = () => {
 	return (
-		<div className='flex  w-full h-[45%] lg:h-[97%] lg:items-center items-start justify-around lg:flex-col lg:w-[45%] '>
-			<div className='w-[45%] h-[50%] lg:h-[40%] lg:w-[90%]'>
+		<div className="flex h-[55vh] w-full flex-col gap-4 lg:h-[calc(100vh-140px)] lg:w-2/5">
+			<div className="h-1/2 w-full rounded-xl border border-border bg-surface">
 				<InputWindow />
 			</div>
-			<div className='w-[45%] h-[50%] lg:h-[40%] lg:w-[90%]'>
+			<div className="h-1/2 w-full rounded-xl border border-border bg-surface">
 				<OutputWindow />
 			</div>
 		</div>

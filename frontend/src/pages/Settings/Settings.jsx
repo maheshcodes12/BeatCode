@@ -1,93 +1,59 @@
-/* eslint-disable no-inner-declarations */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { isLoggedIn } from "../../components/Login/isLoggedIn";
 import { getUserData } from "../../services/getUserData";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Loading from "../../components/Loading/Loading";
+
 const Settings = () => {
-        const [user, setUser] = useState(null);
-        useEffect(() => {
-                if (isLoggedIn()) {
-                        const email = localStorage.getItem("email");
-                        async function handle() {
-                                const res = await getUserData(email);
-                                setUser(res.data);
-                        }
-                        handle();
-                }
-        }, []);
-        function getDaysSince(dateString) {
-                const currentDate = new Date();
-                const createDate = new Date(dateString);
+	const [user, setUser] = useState(null);
 
-                // Calculate the difference in milliseconds
-                const differenceMs = currentDate - createDate;
+	useEffect(() => {
+		if (isLoggedIn()) {
+			const email = localStorage.getItem("email");
+			async function handle() {
+				const res = await getUserData(email);
+				setUser(res.data);
+			}
+			handle();
+		}
+	}, []);
 
-                // Convert milliseconds to days
-                const daysSince = Math.floor(differenceMs / (1000 * 60 * 60 * 24));
+	function getDaysSince(dateString) {
+		const currentDate = new Date();
+		const createDate = new Date(dateString);
+		const differenceMs = currentDate - createDate;
+		return Math.floor(differenceMs / (1000 * 60 * 60 * 24));
+	}
 
-                return daysSince;
-        }
-        return (
-                <div className="h-[100vh] w-[100vw]">
-                        <div className="h-[8vh] w-[100vw] flex justify-center items-center">
-                                <Header />
-                        </div>
-                        {user ? (
-                                <div className="w-[100%] h-[87vh] flex justify-start flex-col gap-12 items-center">
-                                        <div className="mt-16">
-                                                <img
-                                                        className="h-20 rounded-[50%] cursor-pointer"
-                                                        src={`https://ui-avatars.com/api/?name=${user.email.charAt(
-                                                                0
-                                                        )}&background=random`}
-                                                        alt="userProfile"
-                                                />
-                                        </div>
-                                        <div className="w-[90%] lg:w-[40%] gap-5 border border-red-200 rounded-md text-[#fff] flex-col flex justify-center  lg:text-2xl p-8 leading-relaxed">
-                                                <table>
-                                                        <tr>
-                                                                <td>
-                                                                        <div className="text-red-400">Name :</div>
-                                                                </td>
-                                                                <td>
-                                                                        <span className="text-red-100">{user.username}</span>
-                                                                </td>
-                                                        </tr>
-                                                        <tr>
-                                                                <td>
-                                                                        <div className="text-red-400">Email :</div>
-                                                                </td>
-                                                                <td>
-                                                                        <span className="text-red-100">{user.email}</span>
-                                                                </td>
-                                                        </tr>
-                                                        <tr>
-                                                                <td>
-                                                                        <div className="text-red-400">BeatCoder since :</div>
-                                                                </td>
-                                                                <td>
-                                                                        <span className="text-red-100">
-                                                                                {getDaysSince(user.createdAt)} days
-                                                                        </span>
-                                                                </td>
-                                                        </tr>
-                                                </table>
-                                        </div>
-                                </div>
-                        ) : (
-                                <div className="min-h-[87vh]">
-                                        <Loading />
-                                </div>
-                        )}
-                        <div className="h-[5vh] w-[100vw] flex justify-center items-center">
-                                <Footer />
-                        </div>
-                </div>
-        );
+	return (
+		<div className="flex min-h-screen w-full flex-col bg-bg">
+			<Header />
+			<div className="flex flex-1 items-center justify-center p-4">
+				{user ? (
+					<div className="flex w-full max-w-[380px] flex-col items-center gap-5 rounded-2xl border border-border bg-surface p-8 text-center">
+						<img
+							className="h-16 w-16 rounded-full"
+							src={`https://ui-avatars.com/api/?name=${user.email.charAt(0)}&background=random`}
+							alt="userProfile"
+						/>
+						<div className="w-full">
+							<div className="mb-4">
+								<div className="font-display text-xl font-bold text-ink">{user.username}</div>
+								<div className="mt-0.5 text-sm text-ink-faint">{user.email}</div>
+							</div>
+							<div className="rounded-lg border border-border bg-[#FBFBFB] px-4 py-2.5 text-sm text-ink-muted">
+								BeatCoder for {getDaysSince(user.createdAt)} days
+							</div>
+						</div>
+					</div>
+				) : (
+					<Loading />
+				)}
+			</div>
+			<Footer />
+		</div>
+	);
 };
 
 export default Settings;

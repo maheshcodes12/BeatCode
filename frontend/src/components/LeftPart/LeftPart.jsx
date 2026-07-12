@@ -1,16 +1,16 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React from "react";
 import NavBar from "../NavBar/NavBar";
 import CodeEditor from "../CodeEditor/CodeEditor";
 
 const LeftPart = () => {
 	return (
-		<div className='flex flex-col mt-4 lg:mt-0 w-full h-[58%] lg:h-[99%]'>
-			<div className='w-[96%] h-[20%] lg:h-[10%]'>
+		<div className="flex h-[45vh] w-full flex-col rounded-xl border border-border bg-surface lg:h-[calc(100vh-140px)] lg:w-3/5">
+			<div className="h-12 flex-shrink-0">
 				<NavBar />
 			</div>
-			<CodeEditor />
+			<div className="flex-1">
+				<CodeEditor />
+			</div>
 		</div>
 	);
 };

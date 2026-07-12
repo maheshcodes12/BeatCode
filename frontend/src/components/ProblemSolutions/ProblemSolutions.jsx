@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Solution from "../Solution/Solution.jsx";
 
 const languages = [

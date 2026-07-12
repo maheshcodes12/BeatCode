@@ -16,12 +16,12 @@ const Question = ({ question }) => {
 				<span
 					className={`mt-2 inline-block rounded-full px-2.5 py-1 text-xs font-semibold ${pillClass[diff] || pillClass.easy}`}
 				>
-					{capitalizeString(diff)}
+					{/* {capitalizeString(diff)} */} diff
 				</span>
 			</div>
 			<p className="text-[15px] leading-relaxed text-ink-muted">{description}</p>
 			<div className="flex flex-col gap-4">
-				{example_cases.map((example, index) => (
+				{/* {example_cases.map((example, index) => (
 					<div key={index} className="rounded-lg border border-border bg-[#FBFBFB] p-4">
 						<p className="mb-2 text-sm font-semibold text-ink">Example {index + 1}</p>
 						<div className="flex flex-col gap-1.5 font-mono text-sm">
@@ -40,7 +40,7 @@ const Question = ({ question }) => {
 							)}
 						</div>
 					</div>
-				))}
+				))} */}
 			</div>
 		</div>
 	);

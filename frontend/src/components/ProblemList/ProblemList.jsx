@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateOutput } from "../../redux/slices/outputSlice";
 import { updateToggleOutput } from "../../redux/slices/toggleOutput";
 import { updatePracticeStatus } from "../../redux/slices/practiceStatusSlice";
+import questionsData from '../../data/questionsdata.json'
 
 const pillClass = {
 	easy: "bg-[#E6F6EF] text-easy",
@@ -23,7 +24,7 @@ const ProblemList = ({ response }) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const questionsData = await fetchAllQuestions();
+				// const questionsData = await fetchAllQuestions();
 				setQuestions(questionsData);
 			} catch (error) {
 				console.error("Error fetching questions:", error);
@@ -50,7 +51,7 @@ const ProblemList = ({ response }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{questions.map((question) => (
+						{ questions.map((question) => (
 							<tr key={question.id} className="border-b border-border text-sm transition-colors hover:bg-[#FBFBFB]">
 								<td className="p-3 text-center">
 									{attemptedQuestions.includes(question.id) ? (

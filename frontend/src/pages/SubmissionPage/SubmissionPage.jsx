@@ -1,38 +1,25 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { isLoggedIn } from "../../components/Login/isLoggedIn";
 import SubmissionList from "../../components/SubmissionList/SubmissionList";
-import Loading from "../../components/Loading/Loading";
 import Register from "../../components/Login/Register";
+
 const SubmissionPage = () => {
 	return (
-		<div className='flex flex-col w-[100vw] h-[100vh]'>
-			<div className='h-[8vh] w-[100vw] flex justify-center items-center'>
-				<Header />
-			</div>
-			<div className='w-full min-h-[87vh]'>
+		<div className="flex min-h-screen w-full flex-col bg-bg">
+			<Header />
+			<div className="flex flex-1 items-center justify-center p-4">
 				{isLoggedIn() ? (
-					<div className='h-full w-full flex justify-center items-center'>
-						<SubmissionList />
-					</div>
+					<SubmissionList />
 				) : (
-					<div className='z-1999 fixed w-full h-[87vh] flex justify-center items-center  bg-[#000] bg-opacity-50 '>
-						<div className='bg-[#2f3136] z-[2000] w-[95%] h-[90%] flex-col flex justify-evenly items-center p-8 rounded-2xl text-white'>
-							<div className='text-2xl text-center'>
-								To use this feature please register yourself, thank you 😊
-							</div>
-							<div>
-								<Register />
-							</div>
-						</div>
+					<div className="flex w-full max-w-[420px] flex-col items-center gap-5 rounded-2xl border border-border bg-surface p-8 text-center">
+						<p className="text-base text-ink-muted">To use this feature please register yourself, thank you 😊</p>
+						<Register />
 					</div>
 				)}
 			</div>
-			<div className='h-[5vh] w-[100vw] flex justify-center items-center'>
-				<Footer />
-			</div>
+			<Footer />
 		</div>
 	);
 };
