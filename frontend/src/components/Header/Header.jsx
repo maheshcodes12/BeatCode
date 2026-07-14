@@ -16,9 +16,9 @@ const Header = () => {
 
 	return (
 		<header className="sticky top-0 z-50 w-full border-b border-border bg-bg/85 backdrop-blur">
-			<div className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-6">
-				<Link to="/" className="flex items-center gap-2.5 font-display text-lg font-bold text-ink">
-					<span className="flex h-[30px] w-[30px] items-center justify-center rounded-[7px] bg-brand font-mono text-[15px] font-semibold text-white">
+			<div className="mx-auto flex h-20 max-w-[1380px] items-center justify-between px-6">
+				<Link to="/" className="flex items-center gap-2.5 font-display text-3xl font-bold text-ink">
+					<span className="flex h-[35px] w-[35px] items-center justify-center rounded-[7px] bg-brand font-mono text-[15px] font-semibold text-white">
 						&gt;_
 					</span>
 					BeatCode
@@ -31,7 +31,7 @@ const Header = () => {
 							<Link
 								key={link.to}
 								to={link.to}
-								className={`border-b-2 pb-1 text-[14.5px] font-medium transition-colors ${
+								className={`border-b-2 pb-1 text-[20px] font-medium transition-colors ${
 									active ? "border-brand text-ink" : "border-transparent text-ink-muted hover:text-ink"
 								}`}
 							>

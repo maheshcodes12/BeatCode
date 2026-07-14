@@ -38,20 +38,20 @@ const Settings = () => {
 				onClick={() => setIsOpen(!isOpen)}
 				title="Editor settings"
 			>
-				<i className="fas fa-cog text-sm"></i>
+				<i className="fas fa-cog text-md"></i>
 			</button>
 
 			{isOpen && (
 				<>
 					<div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)}></div>
-					<div className="absolute right-0 top-11 z-50 w-72 rounded-xl border border-border bg-surface p-4 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]">
+					<div className="absolute right-0 top-11 z-50 w-96 rounded-xl border border-border bg-surface p-4 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]">
 						<div className="mb-4 flex items-center justify-between">
 							<div>
-								<p className="text-sm font-semibold text-ink">Font size</p>
-								<p className="text-xs text-ink-faint">Editor text size</p>
+								<p className="text-md font-semibold text-ink">Font size</p>
+								<p className="text-md text-ink-faint">Editor text size</p>
 							</div>
 							<select
-								className="h-9 rounded-lg border border-border bg-bg px-2 text-sm text-ink outline-none focus:border-brand"
+								className="h-9 rounded-lg border border-border bg-bg px-2 text-md text-ink outline-none focus:border-brand"
 								name="font"
 								value={font}
 								onChange={handleInputChange}
@@ -66,11 +66,11 @@ const Settings = () => {
 
 						<div className="mb-4 flex items-center justify-between">
 							<div>
-								<p className="text-sm font-semibold text-ink">Theme</p>
-								<p className="text-xs text-ink-faint">Editor color theme</p>
+								<p className="text-md font-semibold text-ink">Theme</p>
+								<p className="text-md text-ink-faint">Editor color theme</p>
 							</div>
 							<select
-								className="h-9 max-w-[130px] rounded-lg border border-border bg-bg px-2 text-sm text-ink outline-none focus:border-brand"
+								className="h-9 max-w-[130px] rounded-lg border border-border bg-bg px-2 text-md text-ink outline-none focus:border-brand"
 								name="editorTheme"
 								value={editorTheme}
 								onChange={handleInputChange}
@@ -85,11 +85,11 @@ const Settings = () => {
 
 						<div className="flex items-center justify-between">
 							<div>
-								<p className="text-sm font-semibold text-ink">Tab size</p>
-								<p className="text-xs text-ink-faint">Spaces per tab</p>
+								<p className="text-md font-semibold text-ink">Tab size</p>
+								<p className="text-md text-ink-faint">Spaces per tab</p>
 							</div>
 							<select
-								className="h-9 rounded-lg border border-border bg-bg px-2 text-sm text-ink outline-none focus:border-brand"
+								className="h-9 rounded-lg border border-border bg-bg px-2 text-md text-ink outline-none focus:border-brand"
 								name="tabSize"
 								value={tabSize}
 								onChange={handleInputChange}

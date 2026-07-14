@@ -14,17 +14,17 @@ const Question = ({ question }) => {
 			<div>
 				<h1 className="font-display text-2xl font-bold text-ink">{title}</h1>
 				<span
-					className={`mt-2 inline-block rounded-full px-2.5 py-1 text-xs font-semibold ${pillClass[diff] || pillClass.easy}`}
+					className={`mt-2 inline-block rounded-full px-2.5 py-1 text-sm font-semibold ${pillClass[diff] || pillClass.easy}`}
 				>
 					{/* {capitalizeString(diff)} */} diff
 				</span>
 			</div>
 			<p className="text-[15px] leading-relaxed text-ink-muted">{description}</p>
 			<div className="flex flex-col gap-4">
-				{/* {example_cases.map((example, index) => (
+				{example_cases.map((example, index) => (
 					<div key={index} className="rounded-lg border border-border bg-[#FBFBFB] p-4">
-						<p className="mb-2 text-sm font-semibold text-ink">Example {index + 1}</p>
-						<div className="flex flex-col gap-1.5 font-mono text-sm">
+						<p className="mb-2 text-md font-semibold text-ink">Example {index + 1}</p>
+						<div className="flex flex-col gap-1.5 font-mono text-md">
 							<div>
 								<span className="text-brand">Input:</span>{" "}
 								<span className="text-ink-muted">{example.input}</span>
@@ -34,13 +34,13 @@ const Question = ({ question }) => {
 								<span className="text-ink-muted">{example.output}</span>
 							</div>
 							{example.explanation && (
-								<div className="pt-1 font-sans text-[13px] text-ink-faint">
+								<div className="pt-1 font-sans text-[15px] text-ink-faint">
 									Explanation: {example.explanation}
 								</div>
 							)}
 						</div>
 					</div>
-				))} */}
+				))}
 			</div>
 		</div>
 	);

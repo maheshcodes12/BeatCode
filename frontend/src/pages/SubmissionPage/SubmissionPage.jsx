@@ -13,8 +13,8 @@ const SubmissionPage = () => {
 				{isLoggedIn() ? (
 					<SubmissionList />
 				) : (
-					<div className="flex w-full max-w-[420px] flex-col items-center gap-5 rounded-2xl border border-border bg-surface p-8 text-center">
-						<p className="text-base text-ink-muted">To use this feature please register yourself, thank you 😊</p>
+					<div className="flex w-full max-w-[520px] flex-col items-center gap-5 rounded-2xl border border-border bg-surface p-8 text-center">
+						<p className="text-lg text-ink-muted">To use this feature please register yourself, thank you 😊</p>
 						<Register />
 					</div>
 				)}

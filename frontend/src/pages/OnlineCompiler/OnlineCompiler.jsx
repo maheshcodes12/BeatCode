@@ -8,7 +8,7 @@ function OnlineCompiler() {
 	return (
 		<div className="flex min-h-screen w-full flex-col bg-bg">
 			<Header />
-			<div className="mx-auto flex w-full max-w-[1400px] flex-1 flex-col gap-4 p-4 lg:flex-row">
+			<div className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col gap-4 p-4 lg:flex-row">
 				<LeftPart />
 				<RightPart />
 			</div>

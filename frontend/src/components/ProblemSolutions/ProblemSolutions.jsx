@@ -17,7 +17,7 @@ export default function ProblemSolutions({ question }) {
 				{languages.map((lang) => (
 					<button
 						key={lang.key}
-						className={`border-b-2 px-3 py-2 text-sm font-semibold transition-colors ${
+						className={`border-b-2 px-3 py-2 text-md font-semibold transition-colors ${
 							navigation === lang.key
 								? "border-brand text-ink"
 								: "border-transparent text-ink-muted hover:text-ink"

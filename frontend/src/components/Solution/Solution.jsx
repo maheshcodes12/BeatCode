@@ -9,7 +9,7 @@ const Solution = ({ solution, language }) => {
 				language={language}
 				style={oneLight}
 				wrapLongLines={true}
-				customStyle={{ margin: 0, fontSize: 13 }}
+				customStyle={{ margin: 0, fontSize: 16 }}
 			>
 				{solution}
 			</SyntaxHighlighter>

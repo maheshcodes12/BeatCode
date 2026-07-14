@@ -15,11 +15,11 @@ const InputWindow = ({ socket, roomID }) => {
 	};
 	return (
 		<div className="flex h-full w-full flex-col gap-2 p-3">
-			<p className="font-display text-sm font-semibold text-ink">
-				Input <span className="ml-1 font-sans text-xs font-normal text-ink-faint">(optional, before running)</span>
+			<p className="font-display text-lg font-semibold text-ink">
+				Input <span className="ml-1 font-sans text-md font-normal text-ink-faint">(optional, before running)</span>
 			</p>
 			<textarea
-				className="h-full w-full resize-none rounded-lg border border-border bg-[#FBFBFB] p-3 font-mono text-sm leading-relaxed text-ink outline-none focus:border-brand"
+				className="h-full w-full resize-none rounded-lg border border-border bg-[#FBFBFB] p-3 font-mono text-md leading-relaxed text-ink outline-none focus:border-brand"
 				name="userInput"
 				id="userInput"
 				value={userInput || ""}

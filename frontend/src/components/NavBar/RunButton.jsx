@@ -74,7 +74,7 @@ const RunButton = () => {
 
 	return (
 		<button
-			className="h-9 w-full rounded-lg bg-brand px-4 text-sm font-semibold text-white transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50"
+			className="h-9 w-full rounded-lg bg-brand px-4 text-md font-semibold text-white transition-colors hover:bg-brand-hover disabled:cursor-not-allowed disabled:opacity-50"
 			onClick={handleClick}
 			disabled={isLoading}
 		>

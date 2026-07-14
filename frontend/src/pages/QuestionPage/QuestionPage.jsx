@@ -67,7 +67,7 @@ const QuestionPage = () => {
 					<Loading />
 				</div>
 			) : (
-				<div className="mx-auto flex w-full max-w-[1400px] flex-1 flex-col gap-4 p-4 lg:flex-row">
+				<div className="mx-auto flex w-full max-w-[1800px] flex-1 flex-col gap-4 p-4 lg:flex-row">
 					{practiceStatus && <FullScreenConfetti />}
 
 					{/* Left pane */}
@@ -76,7 +76,7 @@ const QuestionPage = () => {
 							{tabs.map((tab) => (
 								<button
 									key={tab.key}
-									className={`border-b-2 px-3 py-2 text-sm font-semibold transition-colors ${
+									className={`border-b-2 px-3 py-2 text-md font-semibold transition-colors ${
 										navigation === tab.key
 											? "border-brand text-ink"
 											: "border-transparent text-ink-muted hover:text-ink"
@@ -91,7 +91,7 @@ const QuestionPage = () => {
 							{navigation === "question" && question && <Question question={question} />}
 							{navigation === "solution" && question && <ProblemSolutions question={question} />}
 							{navigation === "submissions" && question && <QuestionSubmission />}
-							{navigation === "problemlist" && <ProblemList response={response} />}
+							<div className="">{navigation === "problemlist" && <ProblemList response={response} />}</div>
 						</div>
 					</div>
 
@@ -105,7 +105,7 @@ const QuestionPage = () => {
 						</div>
 						<button
 							onClick={handleToggleOutput}
-							className="flex h-10 w-full flex-shrink-0 items-center justify-between border-t border-border px-4 text-sm font-semibold text-ink"
+							className="flex h-10 w-full flex-shrink-0 items-center justify-between border-t border-border px-4 text-md font-semibold text-ink"
 						>
 							Console
 							<i className={`fa-solid fa-angle-${toggleOutput ? "down" : "up"}`}></i>

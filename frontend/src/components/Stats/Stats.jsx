@@ -19,10 +19,10 @@ export default function Stats({ response }) {
 
 	return (
 		<div className="flex h-full w-full flex-col gap-4 rounded-xl border border-border bg-surface p-5">
-			<h2 className="font-display text-base font-bold text-ink">Your progress</h2>
+			<h2 className="font-display text-lg font-bold text-ink">Your progress</h2>
 
 			{!isLoggedIn() && (
-				<div className="rounded-lg border border-border bg-[#FBFBFB] px-3 py-2.5 text-sm text-ink-muted">
+				<div className="rounded-lg border border-border bg-[#FBFBFB] px-3 py-2.5 text-lg text-ink-muted">
 					Log in to track your progress.
 				</div>
 			)}
@@ -30,7 +30,7 @@ export default function Stats({ response }) {
 			<div className="flex flex-col">
 				{rows.map((row) => (
 					<div key={row.key}>
-						<div className="flex items-center justify-between text-sm font-semibold">
+						<div className="flex items-center justify-between text-md font-semibold">
 							<span className={row.textClass}>{row.label}</span>
 							<span className="text-ink-faint">
 								{problemsSolved[row.key]}/{totalProblems[row.key]}

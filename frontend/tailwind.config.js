@@ -3,6 +3,10 @@ export default {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		extend: {
+			fontSize: {
+				'medium': '1.2 rem',
+				'md':'1 rem',
+			},
 			colors: {
 				bg: "#FAFAFA",
 				surface: "#FFFFFF",

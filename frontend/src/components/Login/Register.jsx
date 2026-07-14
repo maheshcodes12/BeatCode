@@ -47,13 +47,13 @@ const Register = () => {
 			<div className="flex items-center gap-2">
 				<button
 					onClick={() => openModal("login")}
-					className="rounded-[9px] border border-border px-4 py-2 text-sm font-semibold text-ink transition-colors hover:bg-[#F1F2F3]"
+					className="rounded-[9px] border border-border px-4 py-2 text-md font-semibold text-ink transition-colors hover:bg-[#F1F2F3]"
 				>
 					Log in
 				</button>
 				<button
 					onClick={() => openModal("signup")}
-					className="rounded-[9px] bg-brand px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-hover"
+					className="rounded-[9px] bg-brand px-4 py-2 text-md font-semibold text-white transition-colors hover:bg-brand-hover"
 				>
 					Sign up
 				</button>
@@ -67,7 +67,7 @@ const Register = () => {
 						<div className="mb-6 flex rounded-lg border border-border bg-[#FBFBFB] p-1">
 							<button
 								onClick={() => setActiveTab("login")}
-								className={`flex-1 rounded-md py-2 text-sm font-semibold transition-colors ${
+								className={`flex-1 rounded-md py-2 text-md font-semibold transition-colors ${
 									activeTab === "login" ? "bg-surface text-ink shadow-sm" : "text-ink-muted"
 								}`}
 							>
@@ -75,7 +75,7 @@ const Register = () => {
 							</button>
 							<button
 								onClick={() => setActiveTab("signup")}
-								className={`flex-1 rounded-md py-2 text-sm font-semibold transition-colors ${
+								className={`flex-1 rounded-md py-2 text-md font-semibold transition-colors ${
 									activeTab === "signup" ? "bg-surface text-ink shadow-sm" : "text-ink-muted"
 								}`}
 							>
@@ -130,7 +130,7 @@ const Register = () => {
 							<div className="flex flex-col gap-3">
 								<h2 className="mb-1 font-display text-xl font-bold text-ink">Welcome back</h2>
 								<input
-									className="rounded-[9px] border border-border bg-bg px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-brand"
+									className="rounded-[9px] border border-border bg-bg px-3.5 py-2.5 text-md text-ink outline-none transition-colors focus:border-brand"
 									placeholder="Email address"
 									type="email"
 									value={userData.email}
@@ -139,7 +139,7 @@ const Register = () => {
 									autoComplete="off"
 								/>
 								<input
-									className="rounded-[9px] border border-border bg-bg px-3.5 py-2.5 text-sm text-ink outline-none transition-colors focus:border-brand"
+									className="rounded-[9px] border border-border bg-bg px-3.5 py-2.5 text-md text-ink outline-none transition-colors focus:border-brand"
 									placeholder="Password"
 									type="password"
 									value={userData.password}
@@ -149,13 +149,13 @@ const Register = () => {
 								/>
 								<button
 									onClick={() => handleRegister("login")}
-									className="mt-1 rounded-[9px] bg-brand py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-hover"
+									className="mt-1 rounded-[9px] bg-brand py-2.5 text-md font-semibold text-white transition-colors hover:bg-brand-hover"
 								>
 									Log in
 								</button>
 								<button
 									onClick={getGoogleAuth}
-									className="flex items-center justify-center gap-2 rounded-[9px] border border-border py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-[#F1F2F3]"
+									className="flex items-center justify-center gap-2 rounded-[9px] border border-border py-2.5 text-md font-semibold text-ink transition-colors hover:bg-[#F1F2F3]"
 								>
 									<i className="fa-brands fa-google" /> Sign in with Google
 								</button>

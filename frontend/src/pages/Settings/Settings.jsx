@@ -31,7 +31,7 @@ const Settings = () => {
 			<Header />
 			<div className="flex flex-1 items-center justify-center p-4">
 				{user ? (
-					<div className="flex w-full max-w-[380px] flex-col items-center gap-5 rounded-2xl border border-border bg-surface p-8 text-center">
+					<div className="flex w-full max-w-[580px] flex-col items-center gap-5 rounded-2xl border border-border bg-surface p-8 py-16 text-center">
 						<img
 							className="h-16 w-16 rounded-full"
 							src={`https://ui-avatars.com/api/?name=${user.email.charAt(0)}&background=random`}
@@ -39,10 +39,10 @@ const Settings = () => {
 						/>
 						<div className="w-full">
 							<div className="mb-4">
-								<div className="font-display text-xl font-bold text-ink">{user.username}</div>
-								<div className="mt-0.5 text-sm text-ink-faint">{user.email}</div>
+								<div className="font-display text-2xl font-bold text-ink">{user.username}</div>
+								<div className="mt-0.5 text-md text-ink-faint">{user.email}</div>
 							</div>
-							<div className="rounded-lg border border-border bg-[#FBFBFB] px-4 py-2.5 text-sm text-ink-muted">
+							<div className="rounded-lg border border-border bg-[#FBFBFB] px-4 py-2.5 text-md text-ink-muted">
 								BeatCoder for {getDaysSince(user.createdAt)} days
 							</div>
 						</div>

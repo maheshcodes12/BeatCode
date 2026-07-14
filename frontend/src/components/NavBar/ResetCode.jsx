@@ -43,7 +43,7 @@ const ResetCode = () => {
 			onClick={handleResetClick}
 			title="Reset code"
 		>
-			<i className="fas fa-undo text-sm"></i>
+			<i className="fas fa-undo text-md"></i>
 		</button>
 	);
 };

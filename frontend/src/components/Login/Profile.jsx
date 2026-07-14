@@ -21,7 +21,7 @@ const Profile = () => {
 		<div className="relative">
 			<button
 				onClick={() => setIsOpen(!isOpen)}
-				className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-sm font-semibold text-white transition-opacity hover:opacity-90"
+				className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-md font-semibold text-white transition-opacity hover:opacity-90"
 			>
 				{initial}
 			</button>
@@ -29,23 +29,23 @@ const Profile = () => {
 			{isOpen && (
 				<>
 					<div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-					<div className="absolute right-0 top-11 z-50 w-64 rounded-xl border border-border bg-surface p-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]">
+					<div className="absolute right-0 top-11 z-50 w-72 rounded-xl border border-border bg-surface p-2 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]">
 						<div className="border-b border-border px-3 py-3">
-							<div className="font-display text-sm font-semibold text-ink">{username}</div>
-							<div className="mt-0.5 truncate text-xs text-ink-faint">{email}</div>
+							<div className="font-display text-md font-semibold text-ink">{username}</div>
+							<div className="mt-0.5 truncate text-sm text-ink-faint">{email}</div>
 						</div>
 						<div className="flex flex-col py-1">
 							<Link
 								to="/submissions"
 								onClick={() => setIsOpen(false)}
-								className="rounded-md px-3 py-2 text-sm text-ink-muted transition-colors hover:bg-[#F1F2F3] hover:text-ink"
+								className="rounded-md px-3 py-2 text-md text-ink-muted transition-colors hover:bg-[#F1F2F3] hover:text-ink"
 							>
 								View submissions
 							</Link>
 							<Link
 								to="/settings"
 								onClick={() => setIsOpen(false)}
-								className="rounded-md px-3 py-2 text-sm text-ink-muted transition-colors hover:bg-[#F1F2F3] hover:text-ink"
+								className="rounded-md px-3 py-2 text-md text-ink-muted transition-colors hover:bg-[#F1F2F3] hover:text-ink"
 							>
 								Settings
 							</Link>
@@ -53,7 +53,7 @@ const Profile = () => {
 						<div className="border-t border-border pt-1">
 							<button
 								onClick={handleLogout}
-								className="w-full rounded-md px-3 py-2 text-left text-sm font-medium text-hard transition-colors hover:bg-[#FBEAEA]"
+								className="w-full rounded-md px-3 py-2 text-left text-md font-medium text-hard transition-colors hover:bg-[#FBEAEA]"
 							>
 								Log out
 							</button>

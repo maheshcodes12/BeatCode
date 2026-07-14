@@ -298,21 +298,21 @@ const CodeRoom = () => {
 		endCall ? (
 			<button
 				onClick={endVideoCall}
-				className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg bg-hard text-sm font-semibold text-white transition-colors hover:bg-[#B93A3A]"
+				className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg bg-hard text-md font-semibold text-white transition-colors hover:bg-[#B93A3A]"
 			>
 				<i className="fa-solid fa-phone-slash"></i> End call
 			</button>
 		) : acceptCallButton ? (
 			<button
 				onClick={startVideoCall}
-				className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg bg-easy text-sm font-semibold text-white transition-colors hover:opacity-90"
+				className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg bg-easy text-md font-semibold text-white transition-colors hover:opacity-90"
 			>
 				<i className="fa-solid fa-video"></i> Accept call
 			</button>
 		) : (
 			<button
 				onClick={startVideoCall}
-				className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg bg-brand text-sm font-semibold text-white transition-colors hover:bg-brand-hover"
+				className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg bg-brand text-md font-semibold text-white transition-colors hover:bg-brand-hover"
 			>
 				<i className="fa-solid fa-video"></i> Video call
 			</button>
@@ -324,14 +324,14 @@ const CodeRoom = () => {
 			onCopy={() => toast.success(`Room ID : ${roomID} copied to clipboard`, { position: "top-right" })}
 		>
 			<div className="flex h-11 w-full cursor-pointer items-center justify-between rounded-lg border border-border bg-surface px-4 transition-colors hover:bg-[#F1F2F3]">
-				<span className="font-mono text-sm font-semibold text-ink">{roomID}</span>
+				<span className="font-mono text-md font-semibold text-ink">{roomID}</span>
 				<i className="fa-solid fa-copy text-ink-muted"></i>
 			</div>
 		</CopyToClipboard>
 	);
 
 	const VideoTile = ({ stream, fallbackLabel }) => (
-		<div className="flex h-full w-full items-center justify-center overflow-hidden rounded-lg border border-border bg-code-bg text-sm text-code-text">
+		<div className="flex h-full w-full items-center justify-center overflow-hidden rounded-lg border border-border bg-code-bg text-xl text-code-text">
 			{stream ? (
 				<ReactPlayer playing height="100%" width="100%" url={stream} volume={fallbackLabel === "me" ? 0 : 1} />
 			) : (
@@ -346,7 +346,7 @@ const CodeRoom = () => {
 				<Header />
 				<div className="flex flex-1 items-center justify-center p-4">
 					<div className="flex w-full max-w-[420px] flex-col items-center gap-5 rounded-2xl border border-border bg-surface p-8 text-center">
-						<p className="text-base text-ink-muted">
+						<p className="text-lg text-ink-muted">
 							To use this feature please register yourself, thank you 😊
 						</p>
 						<Register />
@@ -412,9 +412,9 @@ const CodeRoom = () => {
 					<CallButton />
 					<button
 						onClick={leaveRoom}
-						className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg bg-hard text-sm font-semibold text-white transition-colors hover:bg-[#B93A3A]"
+						className="flex h-10 flex-1 items-center justify-center gap-2 rounded-lg bg-hard text-md font-semibold text-white transition-colors hover:bg-[#B93A3A]"
 					>
-						<i className="fa-solid fa-arrow-right-from-bracket"></i> Leave room
+						<i className="fa-solid fa-arrow-right-from-bracket text-md"></i> Leave room
 					</button>
 				</div>
 

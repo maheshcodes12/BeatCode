@@ -35,9 +35,9 @@ const QuestionSubmission = () => {
 								src={`https://ui-avatars.com/api/?name=${submission.user_email?.charAt(0)}&background=random`}
 								alt="userProfile"
 							/>
-							<span className="text-sm font-semibold text-ink">{submission.user_name}</span>
-							<span className="text-xs text-ink-faint">· {formatDateTime(submission.createdAt)}</span>
-							<span className="text-xs text-ink-faint">
+							<span className="text-md font-semibold text-ink">{submission.user_name}</span>
+							<span className="text-sm text-ink-faint">· {formatDateTime(submission.createdAt)}</span>
+							<span className="text-sm text-ink-faint">
 								· {capitalizeString(submission.language === "cpp" ? "C++" : submission.language)}
 							</span>
 						</div>
@@ -46,7 +46,7 @@ const QuestionSubmission = () => {
 								language={submission.language}
 								style={oneLight}
 								wrapLongLines
-								customStyle={{ margin: 0, fontSize: 13 }}
+								customStyle={{ margin: 0, fontSize: 16 }}
 							>
 								{submission.code}
 							</SyntaxHighlighter>

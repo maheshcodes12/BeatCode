@@ -44,7 +44,7 @@ const ProblemList = ({ response }) => {
 			{questions.length ? (
 				<table className="w-full border-collapse text-left">
 					<thead className="sticky top-0 bg-surface">
-						<tr className="border-b border-border text-xs font-semibold uppercase tracking-wide text-ink-faint">
+						<tr className="border-b border-border text-[17px] font-semibold uppercase tracking-wide text-ink-faint">
 							<th className="w-[10%] p-3 text-center">Status</th>
 							<th className="w-[65%] p-3">Problem</th>
 							<th className="w-[25%] p-3">Difficulty</th>
@@ -52,7 +52,7 @@ const ProblemList = ({ response }) => {
 					</thead>
 					<tbody>
 						{ questions.map((question) => (
-							<tr key={question.id} className="border-b border-border text-sm transition-colors hover:bg-[#FBFBFB]">
+							<tr key={question.id} className="border-b border-border text-md transition-colors hover:bg-[#FBFBFB]">
 								<td className="p-3 text-center">
 									{attemptedQuestions.includes(question.id) ? (
 										<span className="text-easy">✓</span>

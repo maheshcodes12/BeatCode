@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
 	return (
 		<footer className="border-t border-border">
-			<div className="mx-auto flex max-w-[1180px] flex-col items-center gap-2 px-6 py-6 text-[13.5px] text-ink-faint sm:flex-row sm:justify-between">
+			<div className="mx-auto flex max-w-[1380px] flex-col items-center gap-2 px-6 py-6 text-[17px] text-ink-faint sm:flex-row sm:justify-between">
 				<span>
 					© BeatCode — built by{" "}
 					<a

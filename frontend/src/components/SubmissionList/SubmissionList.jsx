@@ -32,14 +32,14 @@ const SubmissionList = () => {
 	}, []);
 
 	const tabClass = (active) =>
-		`flex-1 rounded-md py-2 text-sm font-semibold transition-colors ${
+		`flex-1 rounded-md py-2 text-md font-semibold transition-colors ${
 			active ? "bg-surface text-ink shadow-sm" : "text-ink-muted"
 		}`;
 
 	const EmptyState = () => (
 		<div className="flex h-full w-full flex-col items-center justify-center gap-2 py-16 text-ink-faint">
-			<i className="fa-solid fa-heart-crack text-2xl text-hard"></i>
-			<span>No submissions made yet</span>
+			<i className="fa-solid fa-heart-crack text-3xl text-hard"></i>
+			<span className="text-lg">No submissions made yet</span>
 		</div>
 	);
 

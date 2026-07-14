@@ -23,7 +23,7 @@ const PracticeProblems = () => {
 	return (
 		<div className="flex min-h-screen w-full flex-col bg-bg">
 			<Header />
-			<div className="mx-auto flex w-full max-w-[1180px] flex-1 flex-col gap-5 p-4 lg:flex-row lg:p-6">
+			<div className="mx-auto flex w-full max-w-[1380px] flex-1 flex-col gap-5 p-4 lg:flex-row lg:p-6">
 				<div className="w-full lg:w-[280px] lg:flex-shrink-0">
 					<Stats response={response} />
 				</div>
